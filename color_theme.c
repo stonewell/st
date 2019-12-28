@@ -1,3 +1,5 @@
+#include "stdio.h"
+
 static const char *atom[] = {
     "#000000",
     "#fc5ef0",
@@ -80,25 +82,85 @@ static const char * solarized_light[] = {
 	"#fdf6e3",  /*  8: brblack  */
 };
 
-int color_index = 1;
+static const char * sunburn[] = {
+    "#373338",
+    "#bf7f80",
+    "#6c8f6b",
+    "#d8c58d",
+    "#7370a4",
+    "#a3779d",
+    "#636181",
+    "#d6d4e8",
+    "#544f55",
+    "#d29193",
+    "#7da47c",
+    "#ebd89f",
+    "#8481b7",
+    "#ad7ea7",
+    "#757395",
+    "#ededec",
+
+	[255] = 0,
+
+	/* more colors can be added after 255 to use with DefaultXX */
+	"#cccccc",
+	"#555555",
+    "#d6d4e8",
+    "#373338",
+};
+
+static const char * zenburn[] = {
+    "#3f3f3f",
+    "#bf7f80",
+    "#60b48a",
+    "#dfaf8f",
+    "#506070",
+    "#dc8cc3",
+    "#8cd0d3",
+    "#DCDCCC",
+
+    "#709080",
+    "#cc9393",
+    "#7f9f7f",
+    "#f0dfaf",
+    "#94bff3",
+    "#ec93d3",
+    "#93e0e3",
+    "#ffffff",
+
+	[255] = 0,
+
+	/* more colors can be added after 255 to use with DefaultXX */
+	"#cccccc",
+	"#555555",
+    "#DCDCCC",
+    "#3f3f3f",
+};
+
+int color_index = 5;
+
+static const char ** color_themes[] = {
+    0,
+    atom,
+    solarized_dark,
+    solarized_light,
+    sunburn,
+    zenburn,
+};
+
+static const int color_theme_count = sizeof(color_themes) / sizeof(const char **);
 
 const char * get_colorname(int i, const char ** default_colorname) {
-    switch(color_index) {
-    case 1:
-        return atom[i];
-    case 2:
-        return solarized_dark[i];
-    case 3:
-        return solarized_light[i];
-    default:
+    if (color_index >= color_theme_count || color_index == 0 || color_themes[color_index] == 0)
         return default_colorname[i];
-    }
+
+    return color_themes[color_index][i];
 }
 
 int next_color(int col_index) {
     col_index++;
 
-    if (col_index > 3)
+    if (col_index >= color_theme_count)
         col_index = 0;
 
     return col_index;
