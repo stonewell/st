@@ -59,6 +59,7 @@ static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
+static void swapcolors(const Arg *);
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"
@@ -728,6 +729,8 @@ sixd_to_16bit(int x)
 	return x == 0 ? 0 : 0x3737 + 0x2828 * x;
 }
 
+extern const char * get_colorname(int i, const char ** default_colorname);
+
 int
 xloadcolor(int i, const char *name, Color *ncolor)
 {
@@ -746,7 +749,7 @@ xloadcolor(int i, const char *name, Color *ncolor)
 			return XftColorAllocValue(xw.dpy, xw.vis,
 			                          xw.cmap, &color, ncolor);
 		} else
-			name = colorname[i];
+			name = get_colorname(i, colorname);
 	}
 
 	return XftColorAllocName(xw.dpy, xw.vis, xw.cmap, name, ncolor);
@@ -769,8 +772,8 @@ xloadcols(void)
 
 	for (i = 0; i < dc.collen; i++)
 		if (!xloadcolor(i, NULL, &dc.col[i])) {
-			if (colorname[i])
-				die("could not allocate color '%s'\n", colorname[i]);
+			if (get_colorname(i, colorname))
+				die("could not allocate color '%s'\n", get_colorname(i, colorname));
 			else
 				die("could not allocate color %d\n", i);
 		}
@@ -1129,13 +1132,13 @@ xinit(int cols, int rows)
 	cursor = XCreateFontCursor(xw.dpy, mouseshape);
 	XDefineCursor(xw.dpy, xw.win, cursor);
 
-	if (XParseColor(xw.dpy, xw.cmap, colorname[mousefg], &xmousefg) == 0) {
+	if (XParseColor(xw.dpy, xw.cmap, get_colorname(mousefg, colorname), &xmousefg) == 0) {
 		xmousefg.red   = 0xffff;
 		xmousefg.green = 0xffff;
 		xmousefg.blue  = 0xffff;
 	}
 
-	if (XParseColor(xw.dpy, xw.cmap, colorname[mousebg], &xmousebg) == 0) {
+	if (XParseColor(xw.dpy, xw.cmap, get_colorname(mousebg, colorname), &xmousebg) == 0) {
 		xmousebg.red   = 0x0000;
 		xmousebg.green = 0x0000;
 		xmousebg.blue  = 0x0000;
@@ -2005,4 +2008,14 @@ run:
 	run();
 
 	return 0;
+}
+
+extern int next_color(int col_index);
+
+void
+swapcolors(const Arg *dummy)
+{
+	color_index = next_color(color_index);
+	xloadcols();
+	redraw();
 }
