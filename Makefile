@@ -4,7 +4,7 @@
 
 include config.mk
 
-SRC = st.c x.c color_theme.c resources_init.c
+SRC = st.c x.c color_theme.c
 OBJ = $(SRC:.c=.o)
 
 all: options st
@@ -22,7 +22,7 @@ config.h:
 	$(CC) $(STCFLAGS) -c $<
 
 st.o: config.h st.h win.h
-x.o: arg.h config.h st.h win.h
+x.o: arg.h config.h st.h win.h resources_init.inl
 
 $(OBJ): config.h config.mk
 

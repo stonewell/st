@@ -250,6 +250,8 @@ static char *opt_title = NULL;
 
 static int oldbutton = 3; /* button event on startup: 3 = release */
 
+#include "resources_init.inl"
+
 void
 clipcopy(const Arg *dummy)
 {
@@ -1078,6 +1080,9 @@ xinit(int cols, int rows)
 		die("can't open display\n");
 	xw.scr = XDefaultScreen(xw.dpy);
 	xw.vis = XDefaultVisual(xw.dpy, xw.scr);
+
+    /* init xresources */
+    config_init();
 
 	/* font */
 	if (!FcInit())

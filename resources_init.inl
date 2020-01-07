@@ -17,36 +17,7 @@ typedef struct {
 	void *dst;
 } ResourcePref;
 
-static char * font;
-static int borderpx = 2;
-static const char * colorname[512] = {0};
-static char * termname;
-static char * shell;
-static float cwscale = 1.0;
-static float chscale = 1.0;
-static unsigned int xfps = 120;
-static unsigned int actionfps = 30;
-static char * opt_name;
-static char * opt_class;
-
-/*
- * blinking timeout (set to 0 to disable blinking) for the terminal blinking
- * attribute.
- */
-static unsigned int blinktimeout = 800;
-
-/*
- * thickness of underline and bar cursors
- */
-static unsigned int cursorthickness = 2;
-
-/*
- * bell volume. It must be a value between -100 and 100. Use 0 for disabling
- * it
- */
-static int bellvolume = 0;
-unsigned int tabspaces = 8;
-
+static
 ResourcePref resources[] = {
     { "font",         STRING,  &font },
     { "color0",       STRING,  &colorname[0] },
@@ -80,6 +51,7 @@ ResourcePref resources[] = {
     { "chscale",      FLOAT,   &chscale },
 };
 
+static
 int
 resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 {
@@ -116,6 +88,7 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 	return 0;
 }
 
+static
 void
 config_init(void)
 {
