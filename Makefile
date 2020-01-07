@@ -4,7 +4,7 @@
 
 include config.mk
 
-SRC = st.c x.c color_theme.c
+SRC = st.c x.c color_theme.c resources_init.c
 OBJ = $(SRC:.c=.o)
 
 all: options st
