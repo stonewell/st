@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=0.8.2
+Terminal=false
+Type=Application
+Name=Suckless Terminal
+Exec=/usr/local/bin/st -e tmux
+Icon=st
