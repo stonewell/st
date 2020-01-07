@@ -137,6 +137,63 @@ static const char * zenburn[] = {
     "#3f3f3f",
 };
 
+static const char * dracula[] = {
+    /* 8 normal colors */
+    [0] = "#000000", /* black   */
+    [1] = "#ff5555", /* red     */
+    [2] = "#50fa7b", /* green   */
+    [3] = "#f1fa8c", /* yellow  */
+    [4] = "#bd93f9", /* blue    */
+    [5] = "#ff79c6", /* magenta */
+    [6] = "#8be9fd", /* cyan    */
+    [7] = "#bbbbbb", /* white   */
+
+    /* 8 bright colors */
+    [8]  = "#44475a", /* black   */
+    [9]  = "#ff5555", /* red     */
+    [10] = "#50fa7b", /* green   */
+    [11] = "#f1fa8c", /* yellow  */
+    [12] = "#bd93f9", /* blue    */
+    [13] = "#ff79c6", /* magenta */
+    [14] = "#8be9fd", /* cyan    */
+    [15] = "#ffffff", /* white   */
+
+ 	[255] = 0,
+
+    /* special colors */
+    [256] = "#f8f8f2", /* foreground */
+    [257] = "#f8f8f2", /* foreground */
+    [258] = "#f8f8f2", /* foreground */
+    [259] = "#282a36", /* background */
+};
+
+static const char * nord[] = {
+	"#3b4252", /* black   */
+	"#bf616a", /* red     */
+	"#a3be8c", /* green   */
+	"#ebcb8b", /* yellow  */
+	"#81a1c1", /* blue    */
+	"#b48ead", /* magenta */
+	"#88c0d0", /* cyan    */
+	"#e5e9f0", /* white   */
+
+	"#4c566a", /* black   */
+	"#bf616a", /* red     */
+	"#a3be8c", /* green   */
+	"#ebcb8b", /* yellow  */
+	"#81a1c1", /* blue    */
+	"#b48ead", /* magenta */
+	"#8fbcbb", /* cyan    */
+	"#eceff4", /* white   */
+
+ 	[255] = 0,
+
+    [256] = "#d8dee9", /* cs */
+	[257] = "#2e3440", /* rcs */
+	[258] = "#d8dee9", /* foreground */
+    [259] = "#2e3440", /* background */
+};
+
 int color_index = 5;
 
 static const char ** color_themes[] = {
@@ -146,6 +203,8 @@ static const char ** color_themes[] = {
     solarized_light,
     sunburn,
     zenburn,
+    dracula,
+    nord,
 };
 
 static const int color_theme_count = sizeof(color_themes) / sizeof(const char **);
