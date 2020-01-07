@@ -17,6 +17,9 @@ typedef struct {
 	void *dst;
 } ResourcePref;
 
+extern
+int color_index;
+
 static
 ResourcePref resources[] = {
     { "font",         STRING,  &font },
@@ -49,6 +52,7 @@ ResourcePref resources[] = {
     { "borderpx",     INTEGER, &borderpx },
     { "cwscale",      FLOAT,   &cwscale },
     { "chscale",      FLOAT,   &chscale },
+    { "colorThemeIndex",      INTEGER,   &color_index },
 };
 
 static
@@ -71,6 +75,8 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 	fullname[sizeof(fullname) - 1] = fullclass[sizeof(fullclass) - 1] = '\0';
 
 	XrmGetResource(db, fullname, fullclass, &type, &ret);
+	printf("%s, %s, %s\n", fullname, fullclass, type);
+
 	if (ret.addr == NULL || strncmp("String", type, 64))
 		return 1;
 
