@@ -4,7 +4,7 @@
 
 include config.mk
 
-SRC = st.c x.c color_theme.c
+SRC = st.c x.c color_theme.c boxdraw.c
 OBJ = $(SRC:.c=.o)
 
 all: options st
@@ -23,6 +23,7 @@ config.h:
 
 st.o: config.h st.h win.h
 x.o: arg.h config.h st.h win.h resources_init.inl
+boxdraw.o: config.h st.h boxdraw_data.h
 
 $(OBJ): config.h config.mk
 
