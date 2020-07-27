@@ -45,8 +45,6 @@ ResourcePref resources[] = {
     { "cursorReverseColor",  STRING,  &colorname[257] },
     { "termname",     STRING,  &termname },
     { "shell",        STRING,  &shell },
-    { "xfps",         INTEGER, &xfps },
-    { "actionfps",    INTEGER, &actionfps },
     { "blinktimeout", INTEGER, &blinktimeout },
     { "bellvolume",   INTEGER, &bellvolume },
     { "tabspaces",    INTEGER, &tabspaces },
